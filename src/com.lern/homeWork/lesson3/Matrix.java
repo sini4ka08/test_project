@@ -16,25 +16,21 @@ public class Matrix {
     public Matrix(int a, int b) {
         this.mas2 = new int[a][b];
     }
-   /* private String getMasToStringCorrect() {
+    private String getMasToStringCorrect() {
         String elems = new String("[");
-        for (int i=0 ;i<balls.length;i++) {
-            elems += balls[i] + ",";
+        for (int i=0 ;i<mas.length;i++) {
+            elems += mas[i] + ",";
         }
         elems += "]";
         return elems;
     }
 
     public void show() {
-        System.out.println("Student{" +
-                "name='" + name + '\'' +
-                ", age=" + age +
-                ", course=" + course +
-                ", balls=" + getMasToStringCorrect() +
+        System.out.println("mas=" + getMasToStringCorrect() +
                 '}');
     }
 
-    @Override
+    /*@Override
     public String toString() {
         return "Student{" +
                 "name='" + name + '\'' +
