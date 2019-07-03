@@ -57,33 +57,24 @@ public class Animals {
         return name.equals(an.name);
     }*/
 
-    @Override                     // переделать
-    public String toString() {
-        return "Animals{" +
-                "name='" + name + '\'' +
-                ", age=" + age +
-                ", weight=" + weight +
-                ", height=" + height +
-                "}";
-    }
-
     public String equalsPorog() {
+        String rezalt = new String("Animals name = " + name);
         if (MAX_AGE > age) {
-            return "младше на: " + (MAX_AGE - age) + " лет";
+            rezalt = rezalt + " младше на: " + (MAX_AGE - age) + " лет, ";
         } else if (MAX_AGE < age) {
-            return "старше на: " + (age - MAX_AGE) + " лет";
+            rezalt = rezalt + " старше на: " + (age - MAX_AGE) + " лет, ";
         }
         if (MAX_WEIGHT > weight) {
-            return "легче на: " + (MAX_WEIGHT - weight) + " кг";
+            rezalt = rezalt + "легче на: " + (MAX_WEIGHT - weight) + " кг, ";
         } else if (MAX_WEIGHT < weight) {
-            return "тяжелее на: " + (weight - MAX_WEIGHT) + " кг";
+            rezalt = rezalt + "тяжелее на: " + (weight - MAX_WEIGHT) + " кг, ";
         }
         if (MAX_HEIGHT > height) {
-            return "ниже на: " + (MAX_HEIGHT - height) + " кг";
+            rezalt = rezalt + "ниже на: " + (MAX_HEIGHT - height) + " см.";
         } else if (MAX_HEIGHT < height) {
-            return "выше на: " + (height - MAX_HEIGHT) + " кг";
-        } else
-            return "Error";
+            rezalt = rezalt + "выше на: " + (height - MAX_HEIGHT) + " см.";
+        }
+        return rezalt;
     }
 
     public String getName() {
