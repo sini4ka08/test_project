@@ -10,6 +10,7 @@ c) выбрать заданное число n абитуриентов, име
 
 public class Abiturient {
 
+    private static int count;
     private int id;
     private String surName;
     private String name;
@@ -17,13 +18,14 @@ public class Abiturient {
     private String address;
     private String phoneNumber;
     public int[] balls;
-    public static final int MAX_BALL = 10;
+    public double mediumBalls;
 
     public Abiturient() {
+        id = count++;
     }
 
-    public Abiturient(int id, String surName, String name, String middleName, String address, String phoneNumber, int... balls) {
-        this.id = id;
+    public Abiturient(String surName, String name, String middleName, String address, String phoneNumber, int... balls) {
+        id = count++;
         this.surName = surName;
         this.name = name;
         this.surName = surName;
@@ -31,6 +33,7 @@ public class Abiturient {
         this.address = address;
         this.phoneNumber = phoneNumber;
         this.balls = balls;
+        medium2();
     }
 
     public String toString() {
@@ -39,18 +42,21 @@ public class Abiturient {
                 ", balls=" + Arrays.toString(balls) + "}";
     }
 
-    public void isAbiturientBad() {
-        String string = new String();
+    public boolean isAbiturientBad() {
+        boolean badAbit = false;
         for (int i = 0; i < balls.length; i++) {
-                if (balls[i] < 5) {
-                    string = surName + " имеет неудовлетворительные оценки"; // как сделать список? не плодить пустые строки?
-                }
+            if (balls[i] < 5) {
+                badAbit = true;
+                break;
             }
-        System.out.println(string);
+        }
+        return badAbit;
     }
-
+    private void medium2() {
+        this.mediumBalls=medium();
+}
     public double medium() {
-        double averageBalls = 1;
+        double averageBalls = 0;
         double sum = 0;
         for (int i = 0; i < balls.length; i++) {
             sum = sum + balls[i];
@@ -59,16 +65,12 @@ public class Abiturient {
         return averageBalls;
     }
 
-    public void isAbiturientAboveAverage() {
-        String string = new String();
-        double sum = 0;
-        for (int i = 0; i < balls.length; i++) {
-            sum = sum + balls[i];
+    public boolean isAverageBallsMoreThen(int ball) {
+        boolean ismoreThanBall = true;
+        if (medium() < ball) {
+            ismoreThanBall = false;
         }
-        if ((sum / balls.length) > 6.0) {
-            string = surName + " имеет средний балл выше 6";  // как сделать список? не плодить пустые строки?
-        }
-        System.out.println(string);
+        return ismoreThanBall;
     }
 
     public int getId() {

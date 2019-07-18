@@ -35,14 +35,6 @@ public class Animals {
                 "}");
     }
 
-    public boolean equals(Animals obj) {
-        if (obj.name == name) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
     /*public boolean equals(Object obj) {
         if (this == obj) return true;
         if (obj == null) return false;

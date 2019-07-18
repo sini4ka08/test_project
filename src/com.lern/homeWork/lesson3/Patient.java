@@ -7,6 +7,8 @@ import java.util.Arrays;
 b) список пациентов, номер медицинской карты у которых находится в заданном интервале.*/
 
 public class Patient {
+
+    private static int count;
     private int id;
     private String surName;
     private String name;
@@ -17,10 +19,11 @@ public class Patient {
     private String diagnosis;
 
     public Patient() {
+        id = count++;
     }
 
-    public Patient(int id, String surName, String name, String middleName, String address, String phoneNumber, int medicalRecordNumber, String diagnosis) {
-        this.id = id;
+    public Patient(String surName, String name, String middleName, String address, String phoneNumber, int medicalRecordNumber, String diagnosis) {
+        id = count++;
         this.surName = surName;
         this.name = name;
         this.surName = surName;
@@ -34,23 +37,7 @@ public class Patient {
     public String toString() {
         return "Patient {" + "id=" + id + ", surName=" + surName + ", name=" + name +
                 ", middleName=" + middleName + ", address=" + address + ", phoneNumber=" + phoneNumber +
-                ", medicalRecordNumber=" + medicalRecordNumber + ", diagnosis" + diagnosis + "}";
-    }
-
-    public void showPatientByDiagnosis(String diagnosis) {
-        String string = new String();
-        if (getDiagnosis() == diagnosis) {
-                string = string + toString() + "\n";
-            }
-        System.out.println(string);
-        }
-
-    public void showPatientBySetInterval() {
-        String string = new String();
-        if (getMedicalRecordNumber() >= 234000 && getMedicalRecordNumber() <= 567000 ) {
-            string = string + toString() + "\n";
-        }
-        System.out.println(string);
+                ", medicalRecordNumber=" + medicalRecordNumber + ", diagnosis=" + diagnosis + "}";
     }
 
     public int getId() {
