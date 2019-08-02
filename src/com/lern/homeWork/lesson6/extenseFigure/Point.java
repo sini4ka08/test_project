@@ -1,4 +1,4 @@
-package com.lern.homeWork.com.lern.homeWork.lesson6.extenseFigure;
+package com.lern.homeWork.lesson6.extenseFigure;
 
 public class Point {
     private double x;
