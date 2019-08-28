@@ -13,7 +13,7 @@ public class ValidatorCreator {
     }
 
     private static void validatorByName(Student student) {
-        if (!student.getName().matches("[A-Z][a-z]+")) {
+        if (!student.getName().matches("[A-ZА-Я][a-zа-я]+")) {
             throw new StudentFormatException("String format exception! Please enter only letters!");
         }
         if (student.getName().length() < 2 || student.getName().length() > 18) {

@@ -5,6 +5,8 @@ import com.lern.homeWork.lesson7.exceptionStudents.exception.StudentSizeExceptio
 
 import java.util.Scanner;
 
+import static com.lern.homeWork.lesson7.exceptionStudents.StudentCreator.addStudent;
+
 public class MainStudents {
 
     public static void main(String[] args) {
@@ -13,15 +15,18 @@ public class MainStudents {
         StudentCreator student = new StudentCreator();
         Scanner scanner = new Scanner(System.in);
         do {
-            System.out.println("1-createStudent, 2-createListOfStudents,"
-                    + " 3-showListOfStudents, 4-showListStudentsByCourse,"
+            System.out.println("1-createStudent, 2-showStudent,"
+                    + " 3-createListOfStudents,"
+                    + " 4-showListStudentsByCourse,"
                     + " 5-showListStudentsByCourseAndAge, 0-exit");
             var = scanner.nextInt();
 
             switch (var) {
                 case 1:
                     try {
-                        ValidatorCreator.validatorStudent(student.createStudent());
+                        Student stud = student.createStudent();
+                        ValidatorCreator.validatorStudent(stud);
+                        addStudent(stud);
                     } catch (StudentFormatException format) {
                         System.out.println(format.getMessage());
                     } catch (StudentSizeException size) {
@@ -30,25 +35,29 @@ public class MainStudents {
                     break;
                 case 2:
                     try {
-                    student.createListOfStudent();
+                        student.iterStudent();
+                    } catch (NullPointerException null1) {
+                        System.out.println("Нет созданного студента.");
+                    }
+                    break;
+                case 3:
+                    try {
+                        student.createListOfStudents();
                     } catch (StudentFormatException format) {
                         System.out.println(format.getMessage());
                     } catch (StudentSizeException size) {
                         System.out.println(size.getMessage());
                     }
                     break;
-                case 3:
-                    System.out.println(student.getStudentAsString());
-                    break;
                 case 4:
                     scanner = new Scanner(System.in);
                     System.out.println("enter course");
                     try {
                         student.showStudentByCourse(scanner.nextInt());
-                    } catch (NullPointerException null1){
-                    System.out.println("Нет списка студентов. Сначала введите в меню №2.");
-                }
-                break;
+                    } catch (NullPointerException null2) {
+                        System.out.println("Нет списка студентов");
+                    }
+                    break;
                 case 5:
                     scanner = new Scanner(System.in);
                     System.out.println("enter course and age");
@@ -57,8 +66,8 @@ public class MainStudents {
                     System.out.println("enter age ");
                     try {
                         student.getStudentByCourseAndAge(course, scanner.nextInt());
-                    } catch (NullPointerException null2) {
-                        System.out.println("Нет списка студентов. Сначала введите в меню №2.");
+                    } catch (NullPointerException null3) {
+                        System.out.println("Нет списка студентов.");
                     }
                     break;
             }
