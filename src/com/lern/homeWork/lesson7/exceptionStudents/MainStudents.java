@@ -16,9 +16,8 @@ public class MainStudents {
         Scanner scanner = new Scanner(System.in);
         do {
             System.out.println("1-createStudent, 2-showStudent,"
-                    + " 3-createListOfStudents,"
-                    + " 4-showListStudentsByCourse,"
-                    + " 5-showListStudentsByCourseAndAge, 0-exit");
+                    + " 3-showListStudentsByCourse,"
+                    + " 4-showListStudentsByCourseAndAge, 0-exit");
             var = scanner.nextInt();
 
             switch (var) {
@@ -34,41 +33,43 @@ public class MainStudents {
                     }
                     break;
                 case 2:
-                    try {
-                        student.iterStudent();
-                    } catch (NullPointerException null1) {
-                        System.out.println("Нет созданного студента.");
-                    }
+                    student.showStudent();
                     break;
                 case 3:
-                    try {
-                        student.createListOfStudents();
-                    } catch (StudentFormatException format) {
-                        System.out.println(format.getMessage());
-                    } catch (StudentSizeException size) {
-                        System.out.println(size.getMessage());
-                    }
+                    do {
+                        scanner = new Scanner(System.in);
+                        System.out.println("enter course");
+                        if (scanner.hasNextInt()) {
+                            student.showStudentByCourse(scanner.nextInt());
+                            break;
+                        } else {
+                            System.out.println("Course format exception! Please enter only numbers");
+                        }
+                    } while (true);
                     break;
                 case 4:
-                    scanner = new Scanner(System.in);
-                    System.out.println("enter course");
-                    try {
-                        student.showStudentByCourse(scanner.nextInt());
-                    } catch (NullPointerException null2) {
-                        System.out.println("Нет списка студентов");
-                    }
-                    break;
-                case 5:
-                    scanner = new Scanner(System.in);
                     System.out.println("enter course and age");
-                    System.out.println("enter course ");
-                    int course = scanner.nextInt();
-                    System.out.println("enter age ");
-                    try {
-                        student.getStudentByCourseAndAge(course, scanner.nextInt());
-                    } catch (NullPointerException null3) {
-                        System.out.println("Нет списка студентов.");
-                    }
+                    int course = 0;
+                    do {
+                        scanner = new Scanner(System.in);
+                        System.out.println("enter course ");
+                        if (scanner.hasNextInt()) {
+                            course = scanner.nextInt();
+                            break;
+                        } else {
+                            System.out.println("Course format exception! Please enter only numbers");
+                        }
+                    } while (true);
+                    do {
+                        scanner = new Scanner(System.in);
+                        System.out.println("enter age ");
+                        if (scanner.hasNextInt()) {
+                            student.getStudentByCourseAndAge(course, scanner.nextInt());
+                            break;
+                        } else {
+                            System.out.println("Age format exception! Please enter only numbers");
+                        }
+                    } while (true);
                     break;
             }
         } while (var != 0);
