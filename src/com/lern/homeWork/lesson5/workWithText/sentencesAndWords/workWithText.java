@@ -8,8 +8,8 @@ public class workWithText {
 
     public static void main(String[] args) throws IOException {
 
-        String fileName = "C:\\Users\\Ольга\\IdeaProjects\\test_project\\src\\com\\lern\\homeWork\\lesson5\\workWithText\\resources\\Compatible.txt";
-        // String fileName = ".\\src\\com\\lern\\homeWork\\lesson5\\workWithText\\resources\\Compatible.txt";
+        // String fileName = "C:\\Users\\Ольга\\IdeaProjects\\test_project\\src\\com\\lern\\homeWork\\lesson5\\workWithText\\resources\\Compatible.txt";
+        String fileName = ".\\src\\com\\lern\\homeWork\\lesson5\\workWithText\\resources\\Compatible.txt";
         String myText = readUsingBufferedReader(fileName, StandardCharsets.UTF_8);
         System.out.println(myText);
         countOfSentencesAndWords(myText);
