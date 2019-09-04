@@ -6,7 +6,7 @@ public class MyArrayList<E> implements List<E> {
 
     Object arr[];
 
-    private int size = 0;  // а не -1!
+    private int size = 0;
     private int capacity;
 
     public MyArrayList() {
@@ -21,12 +21,12 @@ public class MyArrayList<E> implements List<E> {
     @Override
     public boolean isEmpty() {
         return size == 0;
-    }//!
+    }
 
     @Override
     public void clear() {
         this.arr = new Object[capacity];
-    }//!
+    }  
 
     @Override
     public boolean contains(Object o) {
@@ -36,7 +36,7 @@ public class MyArrayList<E> implements List<E> {
             }
         }
         return false;
-    }//!
+    }
 
     @Override
     public Object[] toArray() {
@@ -45,52 +45,64 @@ public class MyArrayList<E> implements List<E> {
             arr[i] = objects[i];
         }
         return objects;
-    }//!
+    }
 
     @Override
     public E get(int index) {
         if (index < size) {
             return (E) arr[index];
-        } /*else {
-            throw //Дописать проверку!
-        }*/
-        return (E) arr[index++];  //не верно!
-    }//!
+        } else {
+            throw new RuntimeException("this index -> " + index + "not exist");
+        }
+    }
 
     @Override
     public E set(int index, E element) {
-        arr[index] = element;   // Дописать проверку!
-        return element;
-    }//!
+        if (index < size) {
+            arr[index] = element;
+            return element;
+        } else {
+            throw new RuntimeException("this index -> " + index + "not exist");
+        }
+    }
 
     @Override
     public E remove(int index) {
+        E remember = (E) arr[index];
         if (index == size - 1) {
-            // arr[index] = null;
             size--;
+            return remember;
+        } else if (index < size - 1) {
+            removeExchange(index);
+            size--;
+            return remember;
         } else {
-            for (int i = index; i < size - 1; i++) {
-                for (int j = i + 1; j < size; j++) {
-                    arr[i] = arr[j];
-                }
-                size--;
-            }
+            throw new RuntimeException("this index -> " + index + "not exist");
         }
-        return (E) arr[index];   // который удали...
-    }//!
+    }
 
     @Override
     public boolean remove(Object o) {
-        for (int i = 0; i < size - 1; i++) {   //сначала где находиться, метод remove exchenge доделать! Повторяющая логика
+        int index = indexOf(o);
+        if (index == size - 1) {
+            size--;
+            return true;
+        } else if (index < size - 1) {
+            removeExchange(index);
+            size--;
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    private void removeExchange(int index) {
+        for (int i = index; i < size - 1; i++) {
             for (int j = i + 1; j < size; j++) {
-            if (arr[i].equals(o)) {
                 arr[i] = arr[j];
             }
-            size--;
-            }
         }
-        return false;
-    }//!
+    }
 
     @Override
     public int indexOf(Object o) {
@@ -100,30 +112,34 @@ public class MyArrayList<E> implements List<E> {
             }
         }
         return -1;
-    }//!!!!!
+    }
 
     @Override
     public int lastIndexOf(Object o) {
         int lastIndex = -1;
         for (int i = 0; i < size; i++) {
             if (arr[i].equals(o)) {
-                lastIndex = i;   // !!!!!!!!
+                lastIndex = i;
             }
         }
         return lastIndex;
-    }//!
+    }
 
     @Override
-    public void add(int index, E element) {   // проверку на индекс!!
-        size++;
-        if (size == arr.length) {
-            restructarizateArr();
+    public void add(int index, E element) {
+        if (index <= size - 1) {
+            size++;
+            if (size == arr.length) {
+                restructarizateArr();
+            }
+            for (int i = size - 1; i > index; i--) {
+                arr[i + 1] = arr[i];
+            }
+            arr[index] = element;
+        } else {
+            throw new RuntimeException("this index -> " + index + "not exist");
         }
-        for (int i = size - 1; i > index; i--) {
-            arr[i + 1] = arr[i];   //???????????????????????
-        }
-        arr[index] = element;
-    }//!
+    }
 
     @Override
     public boolean add(E e) {
