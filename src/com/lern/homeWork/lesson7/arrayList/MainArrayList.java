@@ -1,6 +1,5 @@
 package com.lern.homeWork.lesson7.arrayList;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -8,79 +7,91 @@ public class MainArrayList {
 
     public static void main(String[] args) {
 
-        String names[] = {"Thomas", "Behemoth", "Alex", "Fiksik", "Philipp", "Pushok", "Snejok", "Simon", "Shark", "Cezar"};
-        List<String> name = new ArrayList<>(Arrays.asList(names));
-        System.out.println(name.toString());
+        List<String> myArrayList = new MyArrayList();
+        myArrayList.add("Thomas");
+        myArrayList.add("Behemoth");
+        myArrayList.add("Alex");
+        myArrayList.add("Fiksik");
+        myArrayList.add("Philipp");
+        myArrayList.add("Pushok");
+        myArrayList.add("Snejok");
+        myArrayList.add("Simon");
+        myArrayList.add("Shark");
+        myArrayList.add("Cezar");
 
-        System.out.println(name.size());
-        System.out.println(name.isEmpty());
+        System.out.println(myArrayList.toString());
 
-        System.out.println(name.contains("Philipp"));
-        System.out.println(name.contains("Olia"));
+        System.out.println(myArrayList.size());
+        System.out.println(myArrayList.isEmpty());
 
-        String[] nameArray = name.toArray(new String[0]);
+        System.out.println(myArrayList.contains("Philipp"));
+        System.out.println(myArrayList.contains("Olia"));
+
+        System.out.println(myArrayList.get(6));
+
+        System.out.println(myArrayList.set(2, "Musik"));
+        System.out.println(myArrayList.toString());
+
+        System.out.println(myArrayList.remove(9));
+        System.out.println(myArrayList.toString());
+        System.out.println(myArrayList.size());
+
+        System.out.println(myArrayList.remove(4));
+        System.out.println(myArrayList.toString());
+        System.out.println(myArrayList.size());
+
+        System.out.println(myArrayList.remove("Pushok"));
+        System.out.println(myArrayList.toString());
+        System.out.println(myArrayList.size());
+
+        System.out.println(myArrayList.remove("Olia"));
+        System.out.println(myArrayList.toString());
+
+        System.out.println(myArrayList.indexOf("Shark"));
+        System.out.println(myArrayList.toString());
+
+        System.out.println(myArrayList.indexOf("Olia"));
+        System.out.println(myArrayList.toString());
+
+        System.out.println(myArrayList.add("Sasha"));
+        System.out.println(myArrayList.toString());
+
+        myArrayList.add(4, "Sasha");
+        System.out.println(myArrayList.toString());
+
+        System.out.println(myArrayList.size());
+        System.out.println(myArrayList.lastIndexOf("Sasha"));
+        System.out.println(myArrayList.toString());
+
+        System.out.println(myArrayList.indexOf("Sasha"));
+        System.out.println(myArrayList.toString());
+        System.out.println(myArrayList.size());
+
+        Object[] nameArray = myArrayList.toArray(new String[0]);
         System.out.println(Arrays.toString(nameArray));
 
-        System.out.println(name.get(6));
-
-        System.out.println(name.set(2, "Musik"));
-        System.out.println(name.toString());
-
-        System.out.println("");
-        System.out.println(name.remove(9));
-        System.out.println(name.toString());
-        System.out.println(name.size());
-
-        System.out.println(name.remove("Pushok"));
-        System.out.println(name.toString());
-        System.out.println(name.size());
-
-        System.out.println(name.remove("Olia"));
-        System.out.println(name.toString());
-
-        System.out.println(name.indexOf("Shark"));
-        System.out.println(name.toString());
-
-        System.out.println(name.indexOf("Olia"));
-        System.out.println(name.toString());
-
-        System.out.println(name.add("Sasha"));
-        System.out.println(name.toString());
-
-        name.add(4, "Sasha");
-        System.out.println(name.toString());
-
-        System.out.println(name.size());
-        name.lastIndexOf("Sasha");
-        System.out.println(name.toString());
-
-        System.out.println(name.indexOf("Sasha"));
-        System.out.println(name.toString());
-
-        System.out.println(name.size());
-        name.add(10, "Pipi");
-        System.out.println(name.toString());
-
         try {
-            System.out.println(name.get(13));
+            myArrayList.add(9, "Pipi");
         } catch (RuntimeException badIndex) {
             System.out.println(badIndex.getMessage());
         }
         try {
-            System.out.println(name.set(14, "Gusik"));
-            System.out.println(name.toString());
+            System.out.println(myArrayList.get(13));
         } catch (RuntimeException badIndex) {
             System.out.println(badIndex.getMessage());
         }
         try {
-            System.out.println(name.remove(16));
-            System.out.println(name.toString());
-
+            System.out.println(myArrayList.set(14, "Gusik"));
+        } catch (RuntimeException badIndex) {
+            System.out.println(badIndex.getMessage());
+        }
+        try {
+            System.out.println(myArrayList.remove(16));
         } catch (RuntimeException badIndex) {
             System.out.println(badIndex.getMessage());
         }
 
-        name.clear();
-        System.out.println(name.isEmpty());
+        myArrayList.clear();
+        System.out.println(myArrayList.isEmpty());
     }
 }

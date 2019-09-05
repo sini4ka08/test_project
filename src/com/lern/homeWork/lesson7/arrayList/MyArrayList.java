@@ -7,10 +7,10 @@ public class MyArrayList<E> implements List<E> {
     Object arr[];
 
     private int size = 0;
-    private int capacity;
+    static final int CAPACITY = 10;
 
     public MyArrayList() {
-        this.arr = new Object[capacity];
+        this.arr = new Object[CAPACITY];
     }
 
     @Override
@@ -25,8 +25,8 @@ public class MyArrayList<E> implements List<E> {
 
     @Override
     public void clear() {
-        this.arr = new Object[capacity];
-    }  
+        this.arr = new Object[CAPACITY];
+    } // не работает!
 
     @Override
     public boolean contains(Object o) {
@@ -39,7 +39,7 @@ public class MyArrayList<E> implements List<E> {
     }
 
     @Override
-    public Object[] toArray() {
+    public Object[] toArray() {                  // не работает!
         Object[] objects = new Object[size];
         for (int i = 0; i < objects.length; i++) {
             arr[i] = objects[i];
@@ -52,7 +52,7 @@ public class MyArrayList<E> implements List<E> {
         if (index < size) {
             return (E) arr[index];
         } else {
-            throw new RuntimeException("this index -> " + index + "not exist");
+            throw new RuntimeException("this index -> " + index + " not exist");
         }
     }
 
@@ -62,7 +62,7 @@ public class MyArrayList<E> implements List<E> {
             arr[index] = element;
             return element;
         } else {
-            throw new RuntimeException("this index -> " + index + "not exist");
+            throw new RuntimeException("this index -> " + index + " not exist");
         }
     }
 
@@ -70,14 +70,14 @@ public class MyArrayList<E> implements List<E> {
     public E remove(int index) {
         E remember = (E) arr[index];
         if (index == size - 1) {
+            arr[index] = null;
             size--;
             return remember;
         } else if (index < size - 1) {
             removeExchange(index);
-            size--;
             return remember;
         } else {
-            throw new RuntimeException("this index -> " + index + "not exist");
+            throw new RuntimeException("this index -> " + index + " not exist");
         }
     }
 
@@ -85,11 +85,11 @@ public class MyArrayList<E> implements List<E> {
     public boolean remove(Object o) {
         int index = indexOf(o);
         if (index == size - 1) {
+            arr[index] = null;
             size--;
             return true;
-        } else if (index < size - 1) {
+        } else if (index < size - 1 && index >= 0) {
             removeExchange(index);
-            size--;
             return true;
         } else {
             return false;
@@ -98,10 +98,12 @@ public class MyArrayList<E> implements List<E> {
 
     private void removeExchange(int index) {
         for (int i = index; i < size - 1; i++) {
-            for (int j = i + 1; j < size; j++) {
-                arr[i] = arr[j];
-            }
+            E prev = (E) arr[i];
+            arr[i] = arr[i + 1];
+            arr[i + 1] = prev;
         }
+        arr[size - 1] = null;
+        size--;
     }
 
     @Override
@@ -127,17 +129,16 @@ public class MyArrayList<E> implements List<E> {
 
     @Override
     public void add(int index, E element) {
+        E remember = (E) arr[index];
         if (index <= size - 1) {
             size++;
             if (size == arr.length) {
                 restructarizateArr();
             }
-            for (int i = size - 1; i > index; i--) {
-                arr[i + 1] = arr[i];
-            }
+            addExchange(index);
             arr[index] = element;
         } else {
-            throw new RuntimeException("this index -> " + index + "not exist");
+            throw new RuntimeException("this index -> " + index + " not exist");
         }
     }
 
@@ -151,12 +152,25 @@ public class MyArrayList<E> implements List<E> {
         return true;
     }
 
+    private void addExchange(int index) {
+        E remember = (E) arr[index];
+        for (int i = size - 1; i > index; i--) {
+            arr[i + 1] = arr[i];
+        }
+        arr[index + 1] = remember;
+    }
+
     private void restructarizateArr() {
-        Object newArr[] = new Object[size + capacity];
+        Object newArr[] = new Object[size + CAPACITY];
         for (int i = 0; i < arr.length; i++) {
             newArr[i] = arr[i];
         }
         arr = newArr;
+    }
+
+    @Override
+    public String toString() {
+        return "String{" + Arrays.toString(arr) + '}';
     }
 
     @Override
