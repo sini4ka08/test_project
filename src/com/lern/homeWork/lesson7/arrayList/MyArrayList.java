@@ -26,7 +26,8 @@ public class MyArrayList<E> implements List<E> {
     @Override
     public void clear() {
         this.arr = new Object[CAPACITY];
-    } // не работает!
+        size = 0;
+    }
 
     @Override
     public boolean contains(Object o) {
@@ -39,10 +40,10 @@ public class MyArrayList<E> implements List<E> {
     }
 
     @Override
-    public Object[] toArray() {                  // не работает!
+    public Object[] toArray() {
         Object[] objects = new Object[size];
-        for (int i = 0; i < objects.length; i++) {
-            arr[i] = objects[i];
+        for (int i = 0; i < size; i++) {
+            objects[i] = arr[i];
         }
         return objects;
     }
@@ -170,7 +171,12 @@ public class MyArrayList<E> implements List<E> {
 
     @Override
     public String toString() {
-        return "String{" + Arrays.toString(arr) + '}';
+        StringBuilder str = new StringBuilder("");
+        for(int i = 0; i < size; i++){
+            str.append(arr[i]);
+            str.append(", ");
+        }
+        return "String{" + str + '}';
     }
 
     @Override

@@ -67,7 +67,7 @@ public class MainArrayList {
         System.out.println(myArrayList.toString());
         System.out.println(myArrayList.size());
 
-        Object[] nameArray = myArrayList.toArray(new String[0]);
+        Object[] nameArray = myArrayList.toArray();
         System.out.println(Arrays.toString(nameArray));
 
         try {
